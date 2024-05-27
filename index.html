@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE GRACE CLOTHING BRAND</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .container.active {
+            display: block;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button, .next-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover, .next-button:hover {
+            background-color: #45a049;
+        }
+
+        .clothing-item {
+            width: 150px;
+            height: auto;
+            margin: 10px;
+            display: inline-block;
+        }
+
+        .toggle-password {
+            cursor: pointer;
+            margin-top: -25px;
+            margin-left: 90%;
+        }
+
+        .cart-item {
+            margin-bottom: 10px;
+        }
+
+        .total-amount {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="page1" class="container active">
+        <h1>THE GRACE CLOTHING BRAND</h1>
+        <h2>Login</h2>
+        <label for="login-username">Username:</label>
+        <input type="text" id="login-username" required>
+        <label for="login-password">Password:</label>
+        <input type="password" id="login-password" required>
+        <span id="toggle-login-password" class="toggle-password">Show</span><br>
+        <button onclick="validateLogin()">Login</button>
+        <p>or</p>
+        <button onclick="showNextPage('page2')">Sign Up</button>
+    </div>
+
+    <div id="page2" class="container">
+        <h1>Sign Up</h1>
+        <label for="signup-username">Username:</label>
+        <input type="text" id="signup-username" required>
+        <label for="signup-age">Age:</label>
+        <input type="number" id="signup-age" required>
+        <label for="signup-email">Email:</label>
+        <input type="email" id="signup-email" required>
+        <label for="signup-password">Password:</label>
+        <input type="password" id="signup-password" required>
+        <label for="signup-dob">Date of Birth:</label>
+        <input type="date" id="signup-dob" required>
+        <button onclick="saveSignUp()">Sign Up</button>
+    </div>
+
+    <div id="page3" class="container">
+        <h1>Welcome to THE GRACE Clothing Brand</h1>
+        <p>Where you get all kind a naughty and funny kind of cloths. Successful fashion designer and entrepreneur Sarah Donofrio credits real world experience for getting her the rest of the way. What she’s learned over the past two decades is that taking your dream from idea to launch and making it in the frenzied world of fashion takes a specific set of skills, a generous dose of creativity, and a pinch of business savvy.</p>
+        <br>
+        <a onclick="showNextPage('page4')" class="next-button">Next</a>
+    </div>
+
+    <div id="page4" class="container">
+        <h1>Our Collection</h1>
+        <img src="clothes1.png" alt="Clothes 1" class="clothing-item">
+        <img src="clothes2.png" alt="Clothes 2" class="clothing-item">
+        <img src="clothes3.png" alt="Clothes 3" class="clothing-item">
+        <br>
+        <a onclick="showNextPage('page5')" class="next-button">Next</a>
+    </div>
+
+    <div id="page5" class="container">
+        <h1>Shop Our Collection</h1>
+        <div class="cart-item">
+            <label>Cloth 1: $300</label>
+            <input type="number" id="cloth1" min="0" value="0">
+        </div>
+        <div class="cart-item">
+            <label>Cloth 2: $500</label>
+            <input type="number" id="cloth2" min="0" value="0">
+        </div>
+        <div class="cart-item">
+            <label>Cloth 3: $150</label>
+            <input type="number" id="cloth3" min="0" value="0">
+        </div>
+        <div class="cart-item">
+            <label>Cloth 4: $67</label>
+            <input type="number" id="cloth4" min="0" value="0">
+        </div>
+        <a onclick="calculateTotal()" class="next-button">Next</a>
+    </div>
+
+    <div id="page6" class="container">
+        <h1>Checkout</h1>
+        <p class="total-amount"></p>
+        <label for="card-number">Card Number:</label>
+        <input type="text" id="card-number" required>
+        <label for="cvv">CVV:</label>
+        <input type="text" id="cvv" required>
+        <a onclick="validatePaymentDetails()" class="next-button">Next</a>
+    </div>
+
+    <div id="page7" class="container">
+        <h1>Enter PIN</h1>
+        <label for="pin">PIN:</label>
+        <input type="password" id="pin" required>
+        <a onclick="validatePin()" class="next-button">Next</a>
+    </div>
+
+    <div id="page8" class="container">
+        <h1>Payment Made</h1>
+        <p>Thank you for your payment. Your transaction has been successfully processed.</p>
+        <a onclick="showNextPage('page9')" class="next-button">Next</a>
+    </div>
+
+    <div id="page9" class="container">
+        <h1>Thanks for Shopping</h1>
+        <p>We appreciate your business. Please come again!</p>
+        <a onclick="showNextPage('page10')" class="next-button">Next</a>
+    </div>
+
+    <div id="page10" class="container">
+        <h1>Feedback</h1>
+        <p>Thank you for shopping with us! Please provide your feedback below:</p>
+        <label for="feedback">Feedback:</label>
+        <textarea id="feedback" rows="4" cols="50"></textarea>
+        <button onclick="submitFeedback()">Submit</button>
+    </div>
+
+    <script>
+        const toggleLoginPassword = document.getElementById('toggle-login-password');
+        const loginPasswordInput = document.getElementById('login-password');
+
+        toggleLoginPassword.addEventListener('click', function () {
+            if (loginPasswordInput.type === 'password') {
+                loginPasswordInput.type = 'text';
+                toggleLoginPassword.textContent = 'Hide';
+            } else {
+                loginPasswordInput.type = 'password';
+                toggleLoginPassword.textContent = 'Show';
+            }
+        });
+
+        function saveSignUp() {
+            const username = document.getElementById('signup-username').value;
+            const age = document.getElementById('signup-age').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const dob = document.getElementById('signup-dob').value;
+
+            if (username && age && email && password && dob) {
+                localStorage.setItem('username', username);
+                localStorage.setItem('password', password);
+                alert('Sign up successful! Please log in.');
+                showNextPage('page1');
+            } else {
+                alert('Please fill in all fields.');
+            }
+        }
+
+        function validateLogin() {
+            const loginUsername = document.getElementById('login-username').value;
+            const loginPassword = document.getElementById('login-password').value;
+            const storedUsername = localStorage.getItem('username');
+            const storedPassword = localStorage.getItem('password');
+
+            if (loginUsername === storedUsername && loginPassword === storedPassword) {
+                showNextPage('page3');
+            } else {
+                alert('Invalid username or password');
+            }
+        }
+
+        function showNextPage(pageId) {
+            const pages = document.querySelectorAll('.container');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        function calculateTotal() {
+            const cloth1 = parseInt(document.getElementById('cloth1').value) * 300;
+            const cloth2 = parseInt(document.getElementById('cloth2').value) * 500;
+            const cloth3 = parseInt(document.getElementById('cloth3').value) * 150;
+            const cloth4 = parseInt(document.getElementById('cloth4').value) * 67;
+            const total = cloth1 + cloth2 + cloth3 + cloth4;
+
+            document.querySelector('.total-amount').textContent = `Total Amount: $${total}`;
+            showNextPage('page6');
+        }
+
+        function validatePaymentDetails() {
+            const cardNumber = document.getElementById('card-number').value;
+            const cvv = document.getElementById('cvv').value;
+
+            if (cardNumber === '0987654321' && cvv === '123') {
+                showNextPage('page7');
+            } else {
+                alert('Invalid card details');
+            }
+        }
+
+        function validatePin() {
+            const pin = document.getElementById('pin').value;
+            if (pin === '4567') {
+                showNextPage('page8');
+            } else {
+                alert('Invalid PIN');
+            }
+        }
+
+        function submitFeedback() {
+            const feedback = document.getElementById('feedback').value;
+            if (feedback) {
+                alert('Thank you for your feedback!');
+                showNextPage('page1');
+            } else {
+                alert('Please provide your feedback.');
+            }
+        }
+    </script>
+
+</body>
+</html>
